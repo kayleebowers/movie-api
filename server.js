@@ -1,4 +1,6 @@
-let http = require('http');
+const http = require('http'),
+    url = require('url'),
+    fs = require('fs');
 
 http.createServer((request, response) => {
     response.writeHead(200, {'Content-Type': 'text/plain'});
