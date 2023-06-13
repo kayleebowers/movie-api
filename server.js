@@ -10,15 +10,22 @@ http.createServer((request, response) => {
     parsedUrl = new URL(address, true);
     filePath = '';
 
-    //check for filePath
+    //check for filePath and read file
     if (parsedUrl.pathname.includes('documentation')) {
         filePath = (__dirname + './documentation.html');
     } else {
         filePath = 'index.html';
     }
+
+    fs.readFile(filePath, (err, data) => {
+        if (err) {
+            throw err;
+        }
+        response.writeHead(200, {'Content-Type': 'text/plain'});
+        response.write(data);
+        response.end('Hello Node!\n');
+    });
     
-    response.writeHead(200, {'Content-Type': 'text/plain'});
-    response.end('Hello Node!\n');
 }).listen(8080);
 
 console.log('My first Node test server is running on Port 8080.');
