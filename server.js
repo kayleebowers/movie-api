@@ -2,7 +2,21 @@ const http = require('http'),
     url = require('url'),
     fs = require('fs');
 
+//create server with http module
+
 http.createServer((request, response) => {
+    //parse url
+    let address = request.url;
+    parsedUrl = new URL(address, true);
+    filePath = '';
+
+    //check for filePath
+    if (parsedUrl.pathname.includes('documentation')) {
+        filePath = (__dirname + './documentation.html');
+    } else {
+        filePath = 'index.html';
+    }
+    
     response.writeHead(200, {'Content-Type': 'text/plain'});
     response.end('Hello Node!\n');
 }).listen(8080);
