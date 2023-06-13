@@ -10,6 +10,19 @@ http.createServer((request, response) => {
     parsedUrl = new URL(address, true);
     filePath = '';
 
+    //add requests to log
+    fs.appendFile('log.txt', `URL: ${address} 
+        Timestamp: ${new Date}
+        
+        `, 
+        (err) => {
+            if (err) {
+                console.log(err);
+            } else {
+                console.log('Added to log');
+            }
+        });
+
     //check for filePath and read file
     if (parsedUrl.pathname.includes('documentation')) {
         filePath = (__dirname + './documentation.html');
@@ -25,7 +38,7 @@ http.createServer((request, response) => {
         response.write(data);
         response.end('Hello Node!\n');
     });
-    
+
 }).listen(8080);
 
 console.log('My first Node test server is running on Port 8080.');
