@@ -39,7 +39,7 @@ http.createServer((request, response) => {
       }
       response.writeHead(200, { "Content-Type": "text/html" });
       response.write(data);
-      response.end("Hello Node!\n");
+      response.end();
     });
   })
   .listen(8080);
