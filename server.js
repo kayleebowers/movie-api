@@ -1,14 +1,14 @@
 const http = require("http"),
-  url = require("url"),
-  fs = require("fs");
+  fs = require("fs"),
+  url = require("url");
 
 //create server with http module
 
 http.createServer((request, response) => {
     //parse url
-    let address = request.url;
-    parsedUrl = new URL(address, true);
-    filePath = "";
+    let address = request.url,
+      parsedUrl = url.parse(address, true),
+      filePath = "";
 
     //add requests to log
     fs.appendFile(
@@ -28,7 +28,7 @@ http.createServer((request, response) => {
 
     //check for filePath and read file
     if (parsedUrl.pathname.includes("documentation")) {
-      filePath = __dirname + "./documentation.html";
+      filePath = (__dirname + "/documentation.html");
     } else {
       filePath = "index.html";
     }
