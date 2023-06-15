@@ -1,5 +1,5 @@
 # ignore all files in directory named node_modules
 node_modules/
 
-#ignore log.txt file
-/log.txt
+#ignore all txt files
+*txt
