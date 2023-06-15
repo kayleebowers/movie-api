@@ -51,3 +51,7 @@ app.get("/movies", (req, res) => {
   res.json(topMovies);
 });
 
+// get textual default at / route
+app.get('/', (req, res) => {
+    res.send('Who doesn\'t love movies?');
+})
