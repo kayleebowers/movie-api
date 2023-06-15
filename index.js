@@ -56,9 +56,8 @@ app.get('/', (req, res) => {
     res.send('Welcome to the Movies API');
 })
 
-// app.get('/index.html', (req, res) => {
-//     res.end('Index file');
-// })
+// Use express.static to serve your “documentation.html” file from the public folder 
+app.use(express.static('public'));
 
 app.listen(8080, () => {
     console.log('App is listening on port 8080');
