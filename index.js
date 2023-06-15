@@ -1,5 +1,7 @@
-const express = require("express");
-morgan = require("morgan");
+const express = require("express"),
+  morgan = require("morgan"),
+  fs = require('fs'),
+  path = require('path');
 
 const app = express();
 
@@ -45,6 +47,9 @@ let topMovies = [
     director: "Robert Zemeckis",
   },
 ];
+
+//use Morgan to log requests to server
+
 
 // get list of top movies from /movies endpoint
 app.get("/movies", (req, res) => {
