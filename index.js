@@ -52,7 +52,7 @@ let topMovies = [
 const logStream = fs.createWriteStream(path.join(__dirname, 'log.txt'), {flags: 'a'});
 
 //use Morgan to log requests to server
-app.use(morgan("common"), {stream: logStream});
+app.use(morgan("common", {stream: logStream}));
 
 // get list of top movies from /movies endpoint
 app.get("/movies", (req, res) => {
