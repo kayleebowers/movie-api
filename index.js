@@ -55,3 +55,11 @@ app.get("/movies", (req, res) => {
 app.get('/', (req, res) => {
     res.send('Who doesn\'t love movies?');
 })
+
+// app.get('/index.html', (req, res) => {
+//     res.end('Index file');
+// })
+
+app.listen(8080, () => {
+    console.log('App is listening on port 8080');
+})
