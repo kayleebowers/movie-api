@@ -53,7 +53,7 @@ app.get("/movies", (req, res) => {
 
 // get textual default at / route
 app.get('/', (req, res) => {
-    res.send('Who doesn\'t love movies?');
+    res.send('Welcome to the Movies API');
 })
 
 // app.get('/index.html', (req, res) => {
