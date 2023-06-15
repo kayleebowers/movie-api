@@ -67,6 +67,12 @@ app.get('/', (req, res) => {
 // Use express.static to serve your “documentation.html” file from the public folder 
 app.use(express.static('public'));
 
+// create error-handling middleware function
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send('Something went wrong');
+})
+
 app.listen(8080, () => {
     console.log('App is listening on port 8080');
 })
