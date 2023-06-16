@@ -45,6 +45,13 @@ let topMovies = [
   }
 ];
 
+const users = [
+  { 
+    name: "Test",
+    id: 1
+  }
+]
+
 //create write stream
 const logStream = fs.createWriteStream(path.join(__dirname, 'log.txt'), {flags: 'a'});
 
