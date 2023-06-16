@@ -132,6 +132,18 @@ app.post("/favorites/:title", (req, res) => {
   }
 })
 
+// Allow users to remove a movie from their list of favorites (showing only a text that a movie has been removed); —DELETE /favorites/:title
+app.delete("/favorites/:title", (req, res) => {
+  let favMovie = req.params.title;
+  let movie = topMovies.find(movie => movie.title === favMovie);
+
+  if (movie) {
+    res.status(200).send(`The movie "${movie.title}" has been deleted from your favorites.`);
+  } else {
+    res.status(400).send('No movie was deleted');
+  }
+})
+
 // get textual default at / route
 app.get('/', (req, res) => {
     res.send('Welcome to the Movies API');
