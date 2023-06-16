@@ -66,16 +66,17 @@ app.get("/movies", (req, res) => {
   res.json(topMovies);
 });
 
-// Return data (description, genre, director, image URL, whether it’s featured or not) about a single movie by title to the user; — GET — /movies/titles
+// get movie data by title — GET — /movies/:title
+app.get("/movies/:title", (req, res) => {
+  const {title} = req.params;
+  let movie = topMovies.find((movie) => movie.title === title);
 
-// Return data about a genre (description) by name/title (e.g., “Thriller”); —GET — /movies/genres
-// Return data about a director (bio, birth year, death year) by name; —GET /movies/directors
-// Allow new users to register; —POST /register 
-// Allow users to update their user info (username); —PUT /update_information
-// Allow users to add a movie to their list of favorites (showing only a text that a movie has been added) —POST /add
-// Allow users to remove a movie from their list of favorites (showing only a text that a movie has been removed); —DELETE /delete
-// Allow existing users to deregister (showing only a text that a user email has been removed—more on this later) —DELETE /deregister
-
+  if (movie) {
+      res.status(200).json(movie);
+  } else {
+      res.status(400).send("No movie found");
+  }
+})
 
 // get textual default at / route
 app.get('/', (req, res) => {
