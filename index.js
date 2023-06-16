@@ -83,6 +83,18 @@ app.get("/genres/:genre", (req, res) => {
   res.status(200).send('So many genres to choose from')
 })
 
+// Return data about a director (bio, birth year, death year) by name; —GET /movies/directors
+app.get("/directors/:name", (req, res) => {
+  const name = req.params.name;
+  let director = topMovies.find(movie => movie.director === name).director;
+
+  if (director) {
+    res.status(200).json(director);
+  } else {
+    res.status(400).send('No director found');
+  }
+})
+
 // get textual default at / route
 app.get('/', (req, res) => {
     res.send('Welcome to the Movies API');
