@@ -54,6 +54,17 @@ const logStream = fs.createWriteStream(path.join(__dirname, 'log.txt'), {flags: 
 //use Morgan to log requests to server
 app.use(morgan("common", {stream: logStream}));
 
+// To Do
+// Return a list of ALL movies to the user;
+// Return data (description, genre, director, image URL, whether it’s featured or not) about a single movie by title to the user;
+// Return data about a genre (description) by name/title (e.g., “Thriller”);
+// Return data about a director (bio, birth year, death year) by name;
+// Allow new users to register;
+// Allow users to update their user info (username);
+// Allow users to add a movie to their list of favorites (showing only a text that a movie has been added—more on this later);
+// Allow users to remove a movie from their list of favorites (showing only a text that a movie has been removed—more on this later);
+// Allow existing users to deregister (showing only a text that a user email has been removed—more on this later).
+
 // get list of top movies from /movies endpoint
 app.get("/movies", (req, res) => {
   res.json(topMovies);
