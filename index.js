@@ -10,43 +10,38 @@ let topMovies = [
   {
     title: "The Shawshank Redemption",
     director: "Frank Darabont",
+    description: "Over the course of several years, two convicts form a friendship, seeking consolation and, eventually, redemption through basic compassion.",
+    genre: "Drama",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/en/8/81/ShawshankRedemptionMoviePoster.jpg"
   },
   {
     title: "The Godfather",
     director: "Francis Ford Coppola",
+    description: "Don Vito Corleone, head of a mafia family, decides to hand over his empire to his youngest son Michael. However, his decision unintentionally puts the lives of his loved ones in grave danger.",
+    genre: ["Crime", "Drama"],
+    imageUrl: "https://commons.wikimedia.org/wiki/File:The_Godfather_logo.svg#/media/File:The_Godfather_logo.svg"
   },
   {
     title: "The Dark Knight",
     director: "Christopher Nolan",
+    description: "When the menace known as the Joker wreaks havoc and chaos on the people of Gotham, Batman must accept one of the greatest psychological and physical tests of his ability to fight injustice.",
+    genre: ["Action", "Crime", "Drama"],
+    imageUrl: "https://upload.wikimedia.org/wikipedia/en/1/1c/The_Dark_Knight_%282008_film%29.jpg"
   },
   {
     title: "12 Angry Men",
     director: "Sidney Lumet",
+    description: "The jury in a New York City murder trial is frustrated by a single member whose skeptical caution forces them to more carefully consider the evidence before jumping to a hasty verdict.",
+    genre: ["Crime", "Drama"],
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/b/b5/12_Angry_Men_%281957_film_poster%29.jpg"
   },
   {
     title: "Schindler's List",
     director: "Steven Spielberg",
-  },
-  {
-    title: "The Lord of the Rings: The Return of the King",
-    director: "Peter Jackson",
-  },
-  {
-    title: "Pulp Fiction",
-    director: "Quentin Tarantino",
-  },
-  {
-    title: "The Good, the Bad and the Ugly",
-    director: "Sergio Leone",
-  },
-  {
-    title: "Spider-Man: Across the Spider-Verse",
-    director: ["Joaquim Dos Santos", "Kemp Powers", "Justin K. Thompson"],
-  },
-  {
-    title: "Forrest Gump",
-    director: "Robert Zemeckis",
-  },
+    description: "In German-occupied Poland during World War II, industrialist Oskar Schindler gradually becomes concerned for his Jewish workforce after witnessing their persecution by the Nazis.",
+    genre: ["Biography", "Drama", "History"],
+    imageUrl: "https://upload.wikimedia.org/wikipedia/en/3/38/Schindler%27s_List_movie.jpg"
+  }
 ];
 
 //create write stream
