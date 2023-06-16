@@ -95,6 +95,18 @@ app.get("/directors/:name", (req, res) => {
   }
 })
 
+// Allow new users to register; —POST /register 
+app.post("/register", (req, res) => {
+  let newUser = req.body;
+
+  if (!newUser.name) {
+    res.status(400).send('No name found');
+  } else {
+    users.push(newUser);
+    res.status(200).send('You are registered')
+  }
+})
+
 // get textual default at / route
 app.get('/', (req, res) => {
     res.send('Welcome to the Movies API');
