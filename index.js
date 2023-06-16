@@ -144,6 +144,18 @@ app.delete("/favorites/:title", (req, res) => {
   }
 })
 
+// Allow existing users to deregister —DELETE /register/:name
+app.delete("/register/:name", (req, res) => {
+  let currentUser = req.params.name;
+  let user = users.find(user => user.name === currentUser);
+
+  if (user) {
+    res.status(200).send(`User ${user.name} has been removed.`);
+  } else {
+    res.status(400).send('No user found');
+  }
+})
+
 // get textual default at / route
 app.get('/', (req, res) => {
     res.send('Welcome to the Movies API');
