@@ -158,7 +158,7 @@ app.delete("/register/:name", (req, res) => {
 
 // get textual default at / route
 app.get('/', (req, res) => {
-    res.send('Welcome to the Movies API');
+  res.sendFile('public/documentation.html', { root: __dirname });
 })
 
 // Use express.static to serve your “documentation.html” file from the public folder 
