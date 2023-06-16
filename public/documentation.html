@@ -68,5 +68,42 @@
           <td>DELETE</td>
         </tr>
       </table>
+    <h2>Endpoints in detail</h2>
+    <h3>Return a list of ALL movies to the user</h3>
+      <div>
+        <p>Using http://localhost:8080/movies will return an array of movie objects in JSON format. The method type is GET and has no response body. The query requires no parameters.</p>
+      </div>
+    <h3>Return data about a single movie by title to the user</h3>
+      <div>
+        <p>Using http://localhost:8080/movies/:title will return a JSON object that includes information about a single movie. The method type is GET and has no response body. The query requires a movie title (Ex: The Godfather) as a parameter written without quotation marks. An example of the URL with the parameter is http://localhost:8080/movies/The%20Godfather.</p>
+      </div>
+    <h3>Return data about a genre (description) by name/title</h3>
+      <div>
+        <p>Using http://localhost:8080/genres/:genre will return an HTML response. The method type is GET and has no response body. The query requires a genre name (Ex: Crime) as a parameter written without quotation marks. An example of the URL with the parameter is http://localhost:8080/genres/Crime, which would return the response "So many genres to choose from."</p>
+      </div>
+    <h3>Return data about a director (bio, birth year, death year) by name</h3>
+      <div>
+        <p>Using http://localhost:8080/directors/:name will return a JSON response with the value of the "name" key. The method type is GET and has no response body. The query requires a direcotr name (Ex: "Steven Spielberg") as a parameter written without quotation marks. An example of the URL with the parameter is http://localhost:8080/directors/Steven%20Spielberg, which would return the JSON response "Steven Spielberg."</p>
+      </div>
+    <h3>Allow new users to register/title</h3>
+      <div>
+        <p>Using http://localhost:8080/register with the POST method will return the HTML response "You are registered" or "No name found". The response body must be a JSON object, like { "name": "Cool Name"}. The query requires no parameter. Entering a valid JSON name in the request body would return the HTML response "You are registered."</p>
+      </div>
+    <h3>Allow users to update their user info</h3>
+      <div>
+        <p>Using localhost:8080/register/:name/:id with the PUT method will return the HTML response "User {name}'s ID was updated to {ID}" or "User not found". No response body is required. The query requires a name and ID parameter. For example, localhost:8080/register/Test/3 would return the HTML response "User Test's ID was updated to 3."</p>
+      </div>
+    <h3>Allow users to add a movie to their list of favorites</h3>
+      <div>
+        <p>Using localhost:8080/favorites/:title with the POST method will return a JSON object with the new favorite movie information or the HTML response "No title found." The response body must be a JSON object with the following properties: {"title": "Star Wars", "director": "George Lucas", "description": "Stars goes to war", "genre": "Sci-fi", "imageUrl": "cool.jpg"}. The query requires the movie title as a parameter. The example Star Wars JSON object here would be shown in the response.</p>
+      </div> 
+    <h3>Allow users to remove a movie from their list of favorites</h3>
+      <div>
+        <p>Using http://localhost:8080/favorites/:title with the DELETE method will return an HTML response: "The movie {title} has been deleted from your favorites." No response body is required. The query requires the movie title as a parameter. The example http://localhost:8080/favorites/12%20Angry$20Men would return an HTML response with "The movie "12 Angry Men" has been deleted from your favorites.</p>
+      </div>
+    <h3>Allow existing users to deregister</h3>
+      <div>
+        <p>Using http://localhost:8080/register/:name with the DELETE method will return an HTML response: "User {user.name} has been removed." No response body is required. The query requires the user name as a parameter. The example http://localhost:8080/register/Test would return an HTML response with "User Test has been removed."</p>
+      </div>
   </body>
 </html>
