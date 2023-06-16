@@ -16,14 +16,14 @@
       list of their favorite movies.
     </p>
     <h2>Endpoints</h2>
-      <p>Return a list of ALL movies to the user;</p>
-      <p>Return data (description, genre, director, image URL, whether it’s featured or not) about a single movie by title to the user</p>
-      <p>Return data about a genre (description) by name/title</p>
-      <p>Return data about a director (bio, birth year, death year) by name</p>
-      <p>Allow new users to register</p>
-      <p>Allow users to update their user info (username)</p>
-      <p>Allow users to add a movie to their list of favorites</p>
-      <p>Allow users to remove a movie from their list of favorites</p>
-      <p>Allow existing users to deregister</p>
+      <p>Return a list of ALL movies to the user — GET — /movies</p>
+      <p>Return data about a single movie by title to the user — GET — /movies/titles</p>
+      <p>Return data about a genre (description) by name/title —GET — /movies/genres </p>
+      <p>Return data about a director (bio, birth year, death year) by name —GET /movies/directors </p>
+      <p>Allow new users to register —POST /register </p>
+      <p>Allow users to update their user info (username) —PUT /update_information </p>
+      <p>Allow users to add a movie to their list of favorites —POST /add </p>
+      <p>Allow users to remove a movie from their list of favorites —DELETE /delete </p>
+      <p>Allow existing users to deregister —DELETE /deregister </p>
   </body>
 </html>
