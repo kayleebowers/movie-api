@@ -107,6 +107,19 @@ app.post("/register", (req, res) => {
   }
 })
 
+// Allow users to update their user info (username); —PUT /register/:name
+app.put("/register/:name/:id", (req, res) => {
+  const name = req.params.name;
+  let user = users.find(user => user.name === name);
+
+  if (user) {
+    user.id = req.params.id;
+    res.status(201).send(`User ${ user.name }'s ID was updated to ${user.id}.`);
+  } else {
+    res.status(400).send('User not found');
+  }
+})
+
 // get textual default at / route
 app.get('/', (req, res) => {
     res.send('Welcome to the Movies API');
