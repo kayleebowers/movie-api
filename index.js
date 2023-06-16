@@ -2,6 +2,7 @@ const express = require("express"),
   morgan = require("morgan"),
   fs = require('fs'),
   uuid = require('uuid'),
+  bodyParser = require('body-parser'),
   path = require('path');
 
 const app = express();
@@ -49,6 +50,9 @@ const logStream = fs.createWriteStream(path.join(__dirname, 'log.txt'), {flags: 
 
 //use Morgan to log requests to server
 app.use(morgan("common", {stream: logStream}));
+
+app.use(bodyParser.json());
+
 
 // Return a list of ALL movies to the user; — GET — /movies
 app.get("/movies", (req, res) => {
