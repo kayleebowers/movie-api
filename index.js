@@ -78,6 +78,11 @@ app.get("/movies/:title", (req, res) => {
   }
 })
 
+// Return data about a genre (description) by name/title (e.g., “Thriller”); —GET — /movies/genres/:name
+app.get("/genres/:genre", (req, res) => {
+  res.status(200).send('So many genres to choose from')
+})
+
 // get textual default at / route
 app.get('/', (req, res) => {
     res.send('Welcome to the Movies API');
