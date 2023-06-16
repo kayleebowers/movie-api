@@ -120,6 +120,18 @@ app.put("/register/:name/:id", (req, res) => {
   }
 })
 
+// Allow users to add a movie to their list of favorites —POST /movies/:title
+app.post("/favorites/:title", (req, res) => {
+  const newTitle = req.body;
+
+  if (newTitle.title) {
+    topMovies.push(newTitle);
+    res.status(201).json(newTitle);
+  } else {
+    res.status(400).send('No title found');
+  }
+})
+
 // get textual default at / route
 app.get('/', (req, res) => {
     res.send('Welcome to the Movies API');
