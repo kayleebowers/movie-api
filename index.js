@@ -162,17 +162,21 @@ app.delete("/register/:Username/movies/:MovieID", (req, res) => {
   });
 });
 
-// Allow existing users to deregister —DELETE /register/:name
-app.delete("/register/:name", (req, res) => {
-  let currentUser = req.params.name;
-  let user = users.find(user => user.name === currentUser);
-
-  if (user) {
-    res.status(200).send(`User ${user.name} has been removed.`);
-  } else {
-    res.status(400).send('No user found');
-  }
-})
+// Allow existing users to deregister by username —DELETE /register/:Username
+app.delete("/register/:Username", (req, res) => {
+  Users.findOneAndRemove({ Username: req.params.Username })
+    .then((user) => {
+      if(!user) {
+        res.status(400).send(req.params.Username + " was not found");
+      } else {
+        res.status(200).send(req.params.Username + " was deleted");
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send("Error: " + error);
+    });
+});
 
 // get textual default at / route
 app.get('/', (req, res) => {
