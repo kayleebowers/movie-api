@@ -99,17 +99,36 @@ app.post("/register", (req, res) => {
 });
 
 // Allow users to update their user info (username); —PUT /register/:name
-app.put("/register/:name/:id", (req, res) => {
-  const name = req.params.name;
-  let user = users.find(user => user.name === name);
+  /* We’ll expect JSON in this format
+  {
+    Username: String,
+    (required)
+    Password: String,
+    (required)
+    Email: String,
+    (required)
+    Birthday: Date
+  }*/
 
-  if (user) {
-    user.id = req.params.id;
-    res.status(201).send(`User ${ user.name }'s ID was updated to ${user.id}.`);
-  } else {
-    res.status(400).send('User not found');
-  }
-})
+app.put("/register/:Username/", (req, res) => {
+  Users.findOneAndUpdate({ Username: req.body.Username }, {
+    $set: {
+      Username: req.body.Username,
+      Password: req.body.Password,
+      Email: req.body.Email,
+      Birthday: req.body.Birthday
+    }
+  }, 
+  { new: true }, 
+  (err, updatedUser) => {
+    if(err) {
+      console.error(err);
+      res.status(500).send("Error: " + err);
+    } else {
+      res.json(updatedUser);
+    }
+  });
+});
 
 // Allow users to add a movie to their list of favorites —POST /movies/:title
 app.post("/favorites/:title", (req, res) => {
