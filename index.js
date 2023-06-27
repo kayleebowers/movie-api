@@ -36,14 +36,14 @@ app.get("/movies", (req, res) => {
 
 // get movie data by title — GET — /movies/:title
 app.get("/movies/:title", (req, res) => {
-  const {title} = req.params;
-  let movie = topMovies.find((movie) => movie.title === title);
-
-  if (movie) {
-      res.status(200).json(movie);
-  } else {
-      res.status(400).send("No movie found");
-  }
+  Movies.findOne({ Title: req.body.Title})
+    .then((movie) => {
+      res.json(movie);
+    })
+    .catch((error) => {
+      console.error(error);
+      res.status(500).send("Error: " + error);
+    })
 })
 
 // Return data about a genre (description) by name/title (e.g., “Thriller”); —GET — /movies/genres/:name
