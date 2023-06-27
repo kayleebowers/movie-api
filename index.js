@@ -24,7 +24,7 @@ app.use(morgan("common", {stream: logStream}));
 
 // Return a list of ALL movies to the user; — GET — /movies
 app.get("/movies", (req, res) => {
-  res.json(topMovies);
+  Movies.find().then(movies => res.json(movies));
 });
 
 // get movie data by title — GET — /movies/:title
