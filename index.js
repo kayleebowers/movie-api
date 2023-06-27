@@ -131,16 +131,20 @@ app.put("/register/:Username/", (req, res) => {
 });
 
 // Allow users to add a movie to their list of favorites —POST /movies/:title
-app.post("/favorites/:title", (req, res) => {
-  const newTitle = req.body;
-
-  if (newTitle.title) {
-    topMovies.push(newTitle);
-    res.status(201).json(newTitle);
-  } else {
-    res.status(400).send('No title found');
-  }
-})
+app.post("/register/:Username/movies/:MovieID", (req, res) => {
+  Users.findOneAndUpdate({ Username: req.params.Username}, {
+    $push: { FavoriteMovies: req.params.MovieID} 
+  }, 
+  { new: true },
+  (err, updatedUser) => {
+    if(err) {
+      console.error(err);
+      res.status(500).send("Error: " + err);
+    } else {
+      res.json(updatedUser);
+    }
+  });
+});
 
 // Allow users to remove a movie from their list of favorites (showing only a text that a movie has been removed); —DELETE /favorites/:title
 app.delete("/favorites/:title", (req, res) => {
