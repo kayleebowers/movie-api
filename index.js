@@ -11,6 +11,9 @@ const app = express(),
   Movies = Models.Movie,
   Users = Models.User;
 
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
 mongoose.connect('mongodb://localhost:27017/moviesdb', {useNewUrlParser: true, useUnifiedTopology: true});
 
 //create write stream
@@ -18,8 +21,6 @@ const logStream = fs.createWriteStream(path.join(__dirname, 'log.txt'), {flags: 
 
 //use Morgan to log requests to server
 app.use(morgan("common", {stream: logStream}));
-
-app.use(bodyParser.json());
 
 // Return a list of ALL movies to the user; — GET — /movies
 app.get("/movies", (req, res) => {
