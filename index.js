@@ -8,12 +8,15 @@ const express = require("express"),
   path = require('path');
 
 const app = express(),
+  //declare models
   Movies = Models.Movie,
   Users = Models.User;
 
+//set up bodyParser
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+//connect mongoose to database
 mongoose.connect('mongodb://localhost:27017/moviesdb', {useNewUrlParser: true, useUnifiedTopology: true});
 
 //create write stream
