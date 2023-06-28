@@ -16,6 +16,11 @@ const app = express(),
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+//require auth and passport
+let auth = require('./auth')(app);
+const passport = require('passport');
+require('./passport');
+
 //connect mongoose to database
 mongoose.connect("mongodb://localhost:27017/moviesdb", {
   useNewUrlParser: true,
