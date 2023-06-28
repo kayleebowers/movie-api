@@ -39,7 +39,7 @@ app.get("/movies", (req, res) => {
 
 // get movie data by title — GET — /movies/:title
 app.get("/movies/:title", (req, res) => {
-  Movies.findOne({ Title: req.params.Title})
+  Movies.findOne({ Title: req.params.title})
     .then((movie) => {
       res.json(movie);
     })
@@ -51,7 +51,7 @@ app.get("/movies/:title", (req, res) => {
 
 // Return data about a genre (description) by name (e.g., “Thriller”); —GET — /movies/genres/:name
 app.get("/genres/:genre", (req, res) => {
-  Movies.find( { Genre: req.params.Name })
+  Movies.find( { Genre: req.params.genre })
     .then((genre) => {
       res.status(200).json(genre)
     })
@@ -63,14 +63,14 @@ app.get("/genres/:genre", (req, res) => {
 
 // Return data about a director (bio, birth year, death year) by name; —GET /movies/directors
 app.get("/directors/:name", (req, res) => {
-  const name = req.params.name;
-  let director = topMovies.find(movie => movie.director === name).director;
-
-  if (director) {
-    res.status(200).json(director);
-  } else {
-    res.status(400).send('No director found');
-  }
+  Movies.findOne({ "Director.Name": req.params.name })
+    .then((director) => {
+      res.status(200).json(director)
+    })
+    .catch((error) => {
+      console.error(error);
+      res.status(400).send("Error: " + error);
+    })
 })
 
 // Allow new users to register; —POST /register 
