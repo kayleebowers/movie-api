@@ -121,7 +121,7 @@ app.post("/register", (req, res) => {
   }*/
 
 app.put("/register/:Username/", (req, res) => {
-  Users.findOneAndUpdate({ Username: req.body.Username }, {
+  Users.findOneAndUpdate({ Username: req.params.Username }, {
     $set: {
       Username: req.body.Username,
       Password: req.body.Password,
