@@ -7,6 +7,7 @@ let Users = Models.User,
   JWTStrategy = passportJWT.Strategy,
   ExtractJWT = passportJWT.ExtractJwt;
 
+//define basic HTTP authentication for login requests
 passport.use(
   new LocalStrategy(
     {
@@ -15,6 +16,8 @@ passport.use(
     },
     (username, password, callback) => {
       console.log(username + " " + password);
+
+      //verify that user exists in database
       Users.findOne({ Username: username }, (error, user) => {
         if (error) {
           console.log(error);
@@ -28,6 +31,7 @@ passport.use(
           });
         }
 
+        //successful callback function (login endpoint) will eventually be executed  
         console.log("finished");
         return callback(null, user);
       });
@@ -35,12 +39,15 @@ passport.use(
   )
 );
 
+//authenticate users based on the JWT submitted alongside their request
 passport.use(
   new JWTStrategy(
     {
+      //get JWT from HTTP header
       jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
       secretOrKey: "your_jwt_secret",
     },
+    //act on claims in JWT
     (jwtPayload, callback) => {
       return Users.findById(jwtPayload._id)
         .then((user) => {
