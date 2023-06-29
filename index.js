@@ -132,26 +132,20 @@ app.post("/register", (req, res) => {
   }*/
 
 app.put("/register/:Username", (req, res) => {
-  Users.findOneAndUpdate(
-    { Username: req.params.Username },
-    {
-      $set: {
-        Username: req.body.Username,
-        Password: req.body.Password,
-        Email: req.body.Email,
-        Birthday: req.body.Birthday
-      }
-    },
-    { new: true },
-    (err, updatedUser) => {
-      if (err) {
-        console.error(err);
-        res.status(500).send("Error: " + err);
-      } else {
-        res.json(updatedUser);
-      }
-    });
-});
+  Users.findOneAndUpdate({ Username: req.params.Username })
+    .then((user) => {
+        user.Username = req.body.Username;
+        user.Password = req.body.Password;
+        user.Email = req.body.Email;
+        user.Birthday = req.body.Birthday;
+        
+        return res.status(201).json(user);
+    })
+    .catch((error) => {
+      console.error(error);
+      res.status(500).send("Error: " + error);
+    })
+})
 
 // Allow users to add a movie to their list of favorites —POST /movies/:title
 app.post("/register/:Username/movies/:MovieID", (req, res) => {
