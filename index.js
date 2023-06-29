@@ -131,7 +131,7 @@ app.post("/register", (req, res) => {
     Birthday: Date
   }*/
 
-app.put("/register/:Username/", (req, res) => {
+app.put("/register/:Username", (req, res) => {
   Users.findOneAndUpdate(
     { Username: req.params.Username },
     {
@@ -139,8 +139,8 @@ app.put("/register/:Username/", (req, res) => {
         Username: req.body.Username,
         Password: req.body.Password,
         Email: req.body.Email,
-        Birthday: req.body.Birthday,
-      },
+        Birthday: req.body.Birthday
+      }
     },
     { new: true },
     (err, updatedUser) => {
@@ -150,8 +150,7 @@ app.put("/register/:Username/", (req, res) => {
       } else {
         res.json(updatedUser);
       }
-    }
-  );
+    });
 });
 
 // Allow users to add a movie to their list of favorites —POST /movies/:title
