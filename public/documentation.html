@@ -64,7 +64,7 @@
         </tr>
         <tr>
           <td>Allow existing users to deregister</td>
-          <td>/register/:name</td>
+          <td>/register/:Username</td>
           <td>DELETE</td>
         </tr>
       </table>
@@ -134,7 +134,7 @@
       </div>
     <h3>Allow existing users to deregister</h3>
       <div>
-        <p>Using http://localhost:8080/register/:name with the DELETE method will return an HTML response: "User {user.name} has been removed." No response body is required. The query requires the user name as a parameter. The example http://localhost:8080/register/Test would return an HTML response with "User Test has been removed."</p>
+        <p>Using http://localhost:8080/register/:Username with the DELETE method will return the HTML response: "{Username} was deleted." No response body is required. The query requires the username as a parameter. The example http://localhost:8080/register/Coolkid would return the HTML response,"Coolkid was deleted." If the username does not exist, it will instead return "{Username} was not found."</p>
       </div>
   </body>
 </html>
