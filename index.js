@@ -9,8 +9,8 @@ const express = require("express"),
 
 const app = express(),
   //declare models
-  Movies = Models.Movie,
-  Users = Models.User;
+  Movies = models.Movie,
+  Users = models.User;
 
 //set up bodyParser
 app.use(bodyParser.json());
