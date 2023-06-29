@@ -60,10 +60,10 @@ app.get("/movies/:title", (req, res) => {
 });
 
 // Return data about a genre (description) by name (e.g., “Thriller”); —GET — /movies/genres/:name
-app.get("/genres/:genre", (req, res) => {
-  Movies.find({ Genre: req.params.genre })
-    .then((genre) => {
-      res.status(200).json(genre);
+app.get("/genres/:name", (req, res) => {
+  Movies.find({ "Genre.Name": req.params.name })
+    .then((movie) => {
+      res.status(200).json(movie[0].Genre["Description"]);
     })
     .catch((error) => {
       console.error(error);
