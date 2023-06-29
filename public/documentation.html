@@ -87,7 +87,20 @@
       </div>
     <h3>Allow new users to register/title</h3>
       <div>
-        <p>Using http://localhost:8080/register with the POST method will return the HTML response "You are registered" or "No name found". The response body must be a JSON object, like { "name": "Cool Name"}. The query requires no parameter. Entering a valid JSON name in the request body would return the HTML response "You are registered."</p>
+        <p>Using http://localhost:8080/register with the POST method will return a JSON object showing the new user's information (as well as an automated ID). The response body must be a JSON object in the following format: 
+          <code>{
+            "Username": String,
+            "Password": String,
+            "Email": String,
+            "Birthday": Date
+        }</code>. The query requires no parameter. Entering a valid JSON object in the request body will return the JSON response object. An example of a valid entry is: 
+        <code>{
+          "Username": "NewUser",
+          "Password": "543",
+          "Email": "new@email.com",
+          "Birthday": "1960-04-29"
+      }</code>.
+      </p>
       </div>
     <h3>Allow users to update their user info</h3>
       <div>
