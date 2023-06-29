@@ -36,7 +36,7 @@ const logStream = fs.createWriteStream(path.join(__dirname, "log.txt"), {
 app.use(morgan("common", { stream: logStream }));
 
 // Return a list of ALL movies to the user; — GET — /movies
-app.get("/movies", (req, res) => {
+app.get("/movies", passport.authenticate('jwt', { session: false }), (req, res) => {
   Movies.find()
     .then((movies) => {
       res.status(201).json(movies);
