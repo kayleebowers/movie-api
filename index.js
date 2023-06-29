@@ -149,21 +149,15 @@ app.put("/register/:Username", (req, res) => {
 
 // Allow users to add a movie to their list of favorites —POST /movies/:title
 app.post("/register/:Username/movies/:MovieID", (req, res) => {
-  Users.findOneAndUpdate(
-    { Username: req.params.Username },
-    {
-      $push: { Favorites: req.params.MovieID },
-    },
-    { new: true },
-    (err, updatedUser) => {
-      if (err) {
-        console.error(err);
-        res.status(500).send("Error: " + err);
-      } else {
-        res.json(updatedUser);
-      }
-    }
-  );
+  Users.findOneAndUpdate({ Username: req.params.Username })
+    .then((user) => {
+      user.Favorites = user.Favorites.push(req.params.MovieID);
+      return res.status(201).json(user);
+    })
+    .catch((error) => {
+      console.error(err);
+      res.status(500).send("Error: " + err);
+    })
 });
 
 // Allow users to remove a movie from their list of favorites (showing only a text that a movie has been removed); —DELETE /favorites/:title
