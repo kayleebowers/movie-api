@@ -33,8 +33,8 @@
           <td>GET</td>
         </tr>
         <tr>
-          <td>Return data about a genre (description) by name/title</td>
-          <td>/genres/:genre</td>
+          <td>Return genre description by searching genre name/title</td>
+          <td>/genres/:name</td>
           <td>GET</td>
         </tr>
         <tr>
@@ -77,9 +77,9 @@
       <div>
         <p>Using http://localhost:8080/movies/:title will return a JSON object that includes information about a single movie. The method type is GET and has no response body. The query requires a movie title (Ex: Spirited Away) as a parameter written without quotation marks. An example of the URL with the parameter is http://localhost:8080/movies/Spirited%20Away.</p>
       </div>
-    <h3>Return data about a genre (description) by name/title</h3>
+    <h3>Return genre description by searching genre name/title</h3>
       <div>
-        <p>Using http://localhost:8080/genres/:genre will return an HTML response. The method type is GET and has no response body. The query requires a genre name (Ex: Crime) as a parameter written without quotation marks. An example of the URL with the parameter is http://localhost:8080/genres/Crime, which would return the response "So many genres to choose from."</p>
+        <p>Using http://localhost:8080/genres/:name will return a JSON response. The method type is GET and has no response body. The query requires a genre name (Ex: Drama) as a parameter written without quotation marks. An example of the URL with the parameter is http://localhost:8080/genres/Drama, which would return the response, "In film and television, drama is a category or genre of narrative fiction (or semi-fiction) intended to be more serious than humorous in tone."</p>
       </div>
     <h3>Return data about a director (bio, birth year, death year) by name</h3>
       <div>
