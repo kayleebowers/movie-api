@@ -126,7 +126,7 @@
       </div>
     <h3>Allow users to add a movie to their list of favorites</h3>
       <div>
-        <p>Using localhost:8080/favorites/:title with the POST method will return a JSON object with the new favorite movie information or the HTML response "No title found." The response body must be a JSON object with the following properties: {"title": "Star Wars", "director": "George Lucas", "description": "Stars goes to war", "genre": "Sci-fi", "imageUrl": "cool.jpg"}. The query requires the movie title as a parameter. The example Star Wars JSON object here would be shown in the response.</p>
+        <p>Using localhost:8080/register/:Username/movies/:MovieID with the POST method will return a JSON object with all of that user's data, including their expanded favorite movies list. The query has no body but must include an existing username and a movie ID as parameters. The example http://localhost:8080/register/Coolkid/movies/649a271eef2156d71e630260 would return a JSON object displaying all of the user Coolkid's data, along with the new favorite movie.</p>
       </div> 
     <h3>Allow users to remove a movie from their list of favorites</h3>
       <div>
