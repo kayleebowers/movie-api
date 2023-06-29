@@ -12,11 +12,10 @@ passport.use(
   new LocalStrategy(
     {
       usernameField: "Username",
-      passwordField: "Password",
+      passwordField: "Password"
     },
     (username, password, callback) => {
       console.log(username + " " + password);
-
       //verify that user exists in database
       Users.findOne({ Username: username }, (error, user) => {
         if (error) {
@@ -27,7 +26,7 @@ passport.use(
         if (!user) {
           console.log("incorrect username");
           return callback(null, false, {
-            message: "Incorrect username or password.",
+            message: "Incorrect username or password."
           });
         }
 
@@ -45,7 +44,7 @@ passport.use(
     {
       //get JWT from HTTP header
       jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
-      secretOrKey: "your_jwt_secret",
+      secretOrKey: "your_jwt_secret"
     },
     //act on claims in JWT
     (jwtPayload, callback) => {
