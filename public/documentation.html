@@ -130,7 +130,7 @@
       </div> 
     <h3>Allow users to remove a movie from their list of favorites</h3>
       <div>
-        <p>Using http://localhost:8080/favorites/:title with the DELETE method will return an HTML response: "The movie {title} has been deleted from your favorites." No response body is required. The query requires the movie title as a parameter. The example http://localhost:8080/favorites/12%20Angry$20Men would return an HTML response with "The movie "12 Angry Men" has been deleted from your favorites.</p>
+        <p>Using http://localhost:8080/register/:Username/movies/:MovieID with the DELETE method will return a JSON object with the user's updated data. If they do not have the specified movie in their favorites list, the query will return "Movie ID not found." No response body is required. The query requires a username and movie ID as a parameter. The example http://localhost:8080/register/Coolkid/movies/649a2c62ef2156d71e630269 would return a JSON object with the user's updated data.</p>
       </div>
     <h3>Allow existing users to deregister</h3>
       <div>
