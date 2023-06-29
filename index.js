@@ -159,7 +159,7 @@ app.post("/register/:Username/movies/:MovieID", (req, res) => {
   Users.findOneAndUpdate(
     { Username: req.params.Username },
     {
-      $push: { FavoriteMovies: req.params.MovieID },
+      $push: { Favorites: req.params.MovieID },
     },
     { new: true },
     (err, updatedUser) => {
@@ -178,7 +178,7 @@ app.delete("/register/:Username/movies/:MovieID", (req, res) => {
   Users.findOneAndUpdate(
     { Username: req.params.Username },
     {
-      $pull: { FavoriteMovies: req.params.MovieID },
+      $pull: { Favorites: req.params.MovieID },
     },
     { new: true },
     (err, updatedUser) => {
