@@ -54,7 +54,7 @@
         </tr>
         <tr>
           <td>Allow users to add a movie to their list of favorites</td>
-          <td>/favorites/:title</td>
+          <td>/register/:Username/movies/:MovieID</td>
           <td>POST</td>
         </tr>
         <tr>
@@ -85,7 +85,7 @@
       <div>
         <p>Using http://localhost:8080/directors/:name will return a JSON object with the director information. The method type is GET and has no response body. The query requires a director name (Ex: "Steven Spielberg") as a parameter written without quotation marks. An example of the URL with the parameter is http://localhost:8080/directors/Steven%20Spielberg, which would return a JSON object with Steven Spielberg's information.</p>
       </div>
-    <h3>Allow new users to register/title</h3>
+    <h3>Allow new users to register</h3>
       <div>
         <p>Using http://localhost:8080/register with the POST method will return a JSON object showing the new user's information (as well as an automated ID). The response body must be a JSON object in the following format: 
           <code>{
@@ -104,7 +104,25 @@
       </div>
     <h3>Allow users to update their user info</h3>
       <div>
-        <p>Using localhost:8080/register/:name/ with the PUT method will return the HTML response "User {name}'s ID was updated to {ID}" or "User not found". No response body is required. The query requires a name and ID parameter. For example, localhost:8080/register/Test/3 would return the HTML response "User Test's ID was updated to 3."</p>
+        <p>Using localhost:8080/register/:Username/ with the PUT method will return a JSON object displaying all of the user's updated information. An already registered username is required as the parameter, and the request must include a request body in the following format: 
+          <code>{
+            Username: String,
+            (required)
+            Password: String,
+            (required)
+            Email: String,
+            (required)
+            Birthday: Date
+          }</code>. 
+          For example, localhost:8080/register/existingUser could have a request body as follows: 
+          <code>{
+            "Username": "existingUser",
+            "Password": "newOne",
+            "Email": "update@email.com",
+            "Birthday": "2023-09-09"
+          }</code>.
+          A successful response returns all the existing user data, which will include the updated sections.
+        </p>
       </div>
     <h3>Allow users to add a movie to their list of favorites</h3>
       <div>
