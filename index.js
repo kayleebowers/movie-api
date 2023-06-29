@@ -39,7 +39,7 @@ app.use(morgan("common", { stream: logStream }));
 app.get("/movies", (req, res) => {
   Movies.find()
     .then((movies) => {
-      res.status(201).res.json(movies);
+      res.status(201).json(movies);
     })
     .catch((error) => {
       console.error(error);
