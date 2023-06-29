@@ -162,21 +162,21 @@ app.post("/register/:Username/movies/:MovieID", (req, res) => {
 
 // Allow users to remove a movie from their list of favorites (showing only a text that a movie has been removed); —DELETE /favorites/:title
 app.delete("/register/:Username/movies/:MovieID", (req, res) => {
-  Users.findOneAndUpdate(
-    { Username: req.params.Username },
-    {
-      $pull: { Favorites: req.params.MovieID },
-    },
-    { new: true },
-    (err, updatedUser) => {
-      if (err) {
-        console.error(err);
-        res.status(500).send("Error: " + err);
-      } else {
-        res.json(updatedUser);
-      }
+  Users.findOneAndUpdate({ Username: req.params.Username })
+  .then((user) => {
+    let index = user.Favorites.indexOf(req.params.MovieID);
+    //check if movie is in their favorites list 
+    if (index > -1) {
+      user.Favorites.splice(index, 1);
+      return res.status(201).json(user);
+    } else {
+      return res.status(400).send("Movie ID not found");
     }
-  );
+  })
+  .catch((error) => {
+    console.error(err);
+    res.status(500).send("Error: " + err);
+  })
 });
 
 // Allow existing users to deregister by username —DELETE /register/:Username
