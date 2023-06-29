@@ -17,8 +17,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 //require auth and passport
-let auth = require('./auth')(app);
-const passport = require('passport');
+let auth = require('./auth.js')(app);
+const passport = require('./passport');
 require('./passport');
 
 //connect mongoose to database
