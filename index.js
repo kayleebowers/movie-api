@@ -74,8 +74,8 @@ app.get("/genres/:name", (req, res) => {
 // Return data about a director (bio, birth year, death year) by name; —GET /movies/directors
 app.get("/directors/:name", (req, res) => {
   Movies.findOne({ "Director.Name": req.params.name })
-    .then((director) => {
-      res.status(200).json(director);
+    .then((movie) => {
+      res.status(200).json(movie.Director);
     })
     .catch((error) => {
       console.error(error);
