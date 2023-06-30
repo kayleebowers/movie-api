@@ -180,7 +180,20 @@ app.post(
 app.put(
   "/register/:Username",
   passport.authenticate("jwt", { session: false }),
+  //validate user input in req body
+  [
+    check("Username", "Username must contain at least 5 characters that are all alphanumeric").isAlphanumeric().isLength({ min: 5 }),
+    check("Password", "Password is required").not().isEmpty(),
+    check("Email", "Must use valid email").isEmail(),
+    check("Birthday", "Date must be valid").isDate()
+  ],
   (req, res) => {
+    //check validation object for errors
+    let errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(422).json({ errors: errors.array() });
+    }
+
     Users.findOneAndUpdate({ Username: req.params.Username })
       .then((user) => {
         let hashedPassword = Users.hashPassword(req.body.Password);
