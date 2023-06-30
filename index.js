@@ -125,7 +125,7 @@ app.post(
     )
       .isAlphanumeric()
       .isLength({ min: 5 }),
-    check("Password", "Password is required").not().isEmpty,
+    check("Password", "Password is required").not().isEmpty(),
     check("Email", "Valid email is required").not().isEmpty().isEmail(),
   ],
   (req, res) => {
