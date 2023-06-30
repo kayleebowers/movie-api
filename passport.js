@@ -19,9 +19,15 @@ passport.use(
       //verify that user exists in database
       Users.findOne({ Username: username })
         .then((user) => {
+          //check for valid user
           if (!user) {
-            console.log("incorrect username");
+            console.log("Incorrect username");
             return callback(null, false, { message: "Incorrect username" });
+          }
+          //check for valid hashed password
+          if (!user.validatePassword(password)) {
+            console.log("Incorrect password");
+            return callback(null, false, { message: "Incorrect password" });
           }
           console.log("finished");
           return callback(null, user);
