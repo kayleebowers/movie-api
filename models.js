@@ -28,7 +28,7 @@ let userSchema = mongoose.Schema({
 });
 
 //function to hash user password
-userSchema.statics.hashPassword = (password) => {
+userSchema.statics.hashPassword = function(password) {
   return bcrypt.hashSync(password, 10);
 }
 
