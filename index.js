@@ -140,12 +140,14 @@ app.post("/register", (req, res) => {
 app.put("/register/:Username", passport.authenticate('jwt', { session: false }), (req, res) => {
   Users.findOneAndUpdate({ Username: req.params.Username })
     .then((user) => {
-        user.Username = req.body.Username;
-        user.Password = req.body.Password;
-        user.Email = req.body.Email;
-        user.Birthday = req.body.Birthday;
-        
-        return res.status(201).json(user);
+      let hashedPassword = Users.hashPassword(req.body.Password);
+
+      user.Username = req.body.Username;
+      user.Password = hashedPassword;
+      user.Email = req.body.Email;
+      user.Birthday = req.body.Birthday;
+
+      return res.status(201).json(user);
     })
     .catch((error) => {
       console.error(error);
