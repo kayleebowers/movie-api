@@ -29,7 +29,7 @@ const passport = require("passport");
 require("./passport");
 
 //connect mongoose to online database
-mongoose.connect("process.env.CONNECTION_URI", {
+mongoose.connect(process.env.CONNECTION_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
