@@ -29,7 +29,7 @@ const passport = require("passport");
 require("./passport");
 
 //connect mongoose to online database
-mongoose.connect("mongodb+srv://MoviesDBAdmin:7hWFfD3K5jYO8dSp@moviesdb.ybzyezj.mongodb.net/MoviesDB?retryWrites=true&w=majority", {
+mongoose.connect("process.env.CONNECTION_URI", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
