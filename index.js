@@ -28,11 +28,16 @@ let auth = require("./auth")(app);
 const passport = require("passport");
 require("./passport");
 
-//connect mongoose to database
-mongoose.connect("mongodb://localhost:27017/moviesdb", {
+//connect mongoose to online database
+mongoose.connect("mongodb+srv://MoviesDBAdmin:7hWFfD3K5jYO8dSp@moviesdb.ybzyezj.mongodb.net/MoviesDB?retryWrites=true&w=majority", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
+// connect mongoose to local database
+// mongoose.connect("mongodb://localhost:27017/moviesdb", {
+//   useNewUrlParser: true,
+//   useUnifiedTopology: true,
+// });
 
 //create write stream
 const logStream = fs.createWriteStream(path.join(__dirname, "log.txt"), {
