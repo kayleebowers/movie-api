@@ -33,6 +33,7 @@ mongoose.connect("process.env.CONNECTION_URI", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
+
 // connect mongoose to local database
 // mongoose.connect("mongodb://localhost:27017/moviesdb", {
 //   useNewUrlParser: true,
