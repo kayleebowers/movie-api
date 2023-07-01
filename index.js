@@ -280,7 +280,7 @@ app.delete(
 
 // get textual default at / route
 app.get("/", (req, res) => {
-  res.sendFile("./welcome.html", { root: __dirname });
+  res.send("Welcome to my app");
 });
 
 // Use express.static to serve your “documentation.html” file from the public folder
