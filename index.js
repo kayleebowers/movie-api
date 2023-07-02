@@ -292,6 +292,6 @@ app.use((err, req, res, next) => {
   res.status(500).send("Something went wrong");
 });
 
-app.listen(port, () => {
-  console.log("App is listening on port " + port);
+app.listen(8080, () => {
+  console.log("App is listening on port 8080");
 });
