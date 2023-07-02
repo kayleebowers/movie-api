@@ -16,7 +16,7 @@ const app = express(),
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-//require cors
+//require cors to allow requests from all origins by default
 const cors = require("cors");
 app.use(cors());
 
