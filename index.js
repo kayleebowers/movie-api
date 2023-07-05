@@ -171,6 +171,19 @@ app.post(
   }
 );
 
+// Get single user's data 
+app.get("/users/:username", passport.authenticate("jwt", { session: false }), (req, res) => {
+  Users.findOne( { Username: req.params.username } )
+    .then((user) => {
+      res.status(200).json(user);
+    })
+    .catch((error) => {
+      console.error(error);
+      res.status(400).send("Error: " + error);
+    })
+  }
+)
+
 // Allow users to update their user info (username); —PUT /users/:name
 /* We’ll expect JSON in this format
   {
