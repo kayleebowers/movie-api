@@ -112,7 +112,7 @@ app.get(
   }
 );
 
-// Allow new users to register; —POST /register
+// Allow new users to register; —POST /users
 // Expected body format:
 // {
 //   ID: Integer,
@@ -122,7 +122,7 @@ app.get(
 //   Birthday: Date
 // }
 app.post(
-  "/register",
+  "/users",
   //validate inputs on server side
   [
     check(
@@ -171,7 +171,7 @@ app.post(
   }
 );
 
-// Allow users to update their user info (username); —PUT /register/:name
+// Allow users to update their user info (username); —PUT /users/:name
 /* We’ll expect JSON in this format
   {
     Username: String,
@@ -184,7 +184,7 @@ app.post(
   }*/
 
 app.put(
-  "/register/:Username",
+  "/users/:username",
   passport.authenticate("jwt", { session: false }),
   //validate user input in req body
   [
@@ -220,7 +220,7 @@ app.put(
 
 // Allow users to add a movie to their list of favorites —POST /movies/:title
 app.post(
-  "/register/:Username/movies/:MovieID",
+  "/users/:username/movies/:movieId",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     Users.findOneAndUpdate({ Username: req.params.Username })
@@ -237,7 +237,7 @@ app.post(
 
 // Allow users to remove a movie from their list of favorites (showing only a text that a movie has been removed); —DELETE /favorites/:title
 app.delete(
-  "/register/:Username/movies/:MovieID",
+  "/users/:username/movies/:movieId",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     Users.findOneAndUpdate({ Username: req.params.Username })
@@ -258,9 +258,9 @@ app.delete(
   }
 );
 
-// Allow existing users to deregister by username —DELETE /register/:Username
+// Allow existing users to deregister by username —DELETE /users/:Username
 app.delete(
-  "/register/:Username",
+  "/users/:username",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     Users.findOneAndRemove({ Username: req.params.Username })
