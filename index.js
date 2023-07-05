@@ -240,15 +240,18 @@ app.delete(
   "/users/:username/movies/:movieId",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    Users.findOneAndUpdate({ Username: req.params.Username })
-      .then((user) => {
-        let index = user.Favorites.indexOf(req.params.MovieID);
-        //check if movie is in their favorites list
-        if (index > -1) {
-          user.Favorites.splice(index, 1);
-          return res.status(201).json(user);
+    Users.findOneAndUpdate(
+        { Username: req.params.username },
+        { 
+          $pull: { Favorites: req.params.movieId }
+        },
+        { new: true }
+      )
+      .then((updatedUser) => {
+        if (!updatedUser) {
+          return res.status(400).send("User not found");
         } else {
-          return res.status(400).send("Movie ID not found");
+          res.status(201).json(updatedUser); 
         }
       })
       .catch((error) => {
