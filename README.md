@@ -16,14 +16,9 @@ The Movies API is the server-side component of a movies web application. The fin
 The app is hosted on [Heroku(https://movies-app1-3d6bd65a6f09.herokuapp.com/)] and can be viewed there.
 
 ## Project dependencies
-* Mongoose
 * bcrypt
 * Body-parser
 * CORS
 * Express-validator
-* JSON web token
-* Morgan
+* Mongoose
 * Passport
-* Passport-jwt
-* Passport-local
-* Uuid
