@@ -236,9 +236,9 @@ app.post(
   "/users/:username/movies/:movieId",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    Users.findOneAndUpdate({ Username: req.params.Username })
+    Users.findOneAndUpdate({ Username: req.params.username })
       .then((user) => {
-        user.Favorites = user.Favorites.push(req.params.MovieID);
+        user.Favorites = user.Favorites.push(req.params.movieId);
         return res.status(201).json(user);
       })
       .catch((error) => {
