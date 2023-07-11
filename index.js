@@ -51,7 +51,6 @@ app.use(morgan("common", { stream: logStream }));
 // Return a list of ALL movies to the user; — GET — /movies
 app.get(
   "/movies",
-  passport.authenticate("jwt", { session: false }),
   (req, res) => {
     Movies.find()
       .then((movies) => {
