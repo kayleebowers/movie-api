@@ -54,12 +54,12 @@
         </tr>
         <tr>
           <td>Allow users to update their user info</td>
-          <td>/users/:username/</td>
+          <td>/users/:id/</td>
           <td>PUT</td>
         </tr>
         <tr>
           <td>Allow users to add a movie to their list of favorites</td>
-          <td>/users/:username/movies/:movieId</td>
+          <td>/users/:id/movies/:movieId</td>
           <td>POST</td>
         </tr>
         <tr>
@@ -69,7 +69,7 @@
         </tr>
         <tr>
           <td>Allow existing users to deregister</td>
-          <td>/users/:username</td>
+          <td>/users/:id</td>
           <td>DELETE</td>
         </tr>
       </table>
@@ -113,7 +113,7 @@
       </div>
     <h3>Allow users to update their user info</h3>
       <div>
-        <p>Using https://movies-app1-3d6bd65a6f09.herokuapp.com/users/:username/ with the PUT method will return a JSON object displaying all of the user's updated information. An already registered username is required as the parameter, and the request must include a request body in the following format: 
+        <p>Using https://movies-app1-3d6bd65a6f09.herokuapp.com/users/:id/ with the PUT method will return a JSON object displaying all of the user's updated information. An already registered username is required as the parameter, and the request must include a request body in the following format: 
           <code>{
             Username: String,
             (required)
@@ -135,15 +135,15 @@
       </div>
     <h3>Allow users to add a movie to their list of favorites</h3>
       <div>
-        <p>Using https://movies-app1-3d6bd65a6f09.herokuapp.com/users/:username/movies/:movieId with the POST method will return a JSON object with all of that user's data, including their expanded favorite movies list. The query has no body but must include an existing username and a movie ID as parameters. The example https://movies-app1-3d6bd65a6f09.herokuapp.com/users/CoolKid/movies/649a271eef2156d71e630260 would return a JSON object displaying all of the user CoolKid's data, along with the new favorite movie.</p>
+        <p>Using https://movies-app1-3d6bd65a6f09.herokuapp.com/users/:id/movies/:movieId with the POST method will return a JSON object with all of that user's data, including their expanded favorite movies list. The query has no body but must include an existing user ID and a movie ID as parameters. The example https://movies-app1-3d6bd65a6f09.herokuapp.com/users/CoolKid/movies/649a271eef2156d71e630260 would return a JSON object displaying all of the user CoolKid's data, along with the new favorite movie.</p>
       </div> 
     <h3>Allow users to remove a movie from their list of favorites</h3>
       <div>
-        <p>Using https://movies-app1-3d6bd65a6f09.herokuapp.com/users/:username/movies/:movieId with the DELETE method will return a JSON object with the user's updated data. If they do not have the specified movie in their favorites list, the query will return "Movie ID not found." No response body is required. The query requires a username and movie ID as a parameter. The example https://movies-app1-3d6bd65a6f09.herokuapp.com/users/CoolKid/movies/649a2c62ef2156d71e630269 would return a JSON object with the user's updated data.</p>
+        <p>Using https://movies-app1-3d6bd65a6f09.herokuapp.com/users/:id/movies/:movieId with the DELETE method will return a JSON object with the user's updated data. If they do not have the specified movie in their favorites list, the query will return "Movie ID not found." No response body is required. The query requires a user ID and movie ID as a parameter. The example https://movies-app1-3d6bd65a6f09.herokuapp.com/users/CoolKid/movies/649a2c62ef2156d71e630269 would return a JSON object with the user's updated data.</p>
       </div>
     <h3>Allow existing users to deregister</h3>
       <div>
-        <p>Using https://movies-app1-3d6bd65a6f09.herokuapp.com/users/:username with the DELETE method will return the HTML response: "{Username} was deleted." No response body is required. The query requires the username as a parameter. The example https://movies-app1-3d6bd65a6f09.herokuapp.com/users/CoolKid would return the HTML response,"CoolKid was deleted." If the username does not exist, it will instead return "{Username} was not found."</p>
+        <p>Using https://movies-app1-3d6bd65a6f09.herokuapp.com/users/:id with the DELETE method will return the HTML response: "{Id} was deleted." No response body is required. The query requires the username as a parameter. The example https://movies-app1-3d6bd65a6f09.herokuapp.com/users/CoolKid would return the HTML response,"CoolKid was deleted." If the user ID does not exist, it will instead return "{id} was not found."</p>
       </div>
   </body>
 </html>
