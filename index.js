@@ -28,13 +28,13 @@ let auth = require("./auth")(app);
 const passport = require("passport");
 require("./passport");
 
-// //connect mongoose to online database
+//connect mongoose to online database
 mongoose.connect(process.env.CONNECTION_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
 
-//connect mongoose to local database
+// connect mongoose to local database
 // mongoose.connect("mongodb://localhost:27017/moviesdb", {
 //   useNewUrlParser: true,
 //   useUnifiedTopology: true,
@@ -251,8 +251,8 @@ app.post(
         }
       })
       .catch((error) => {
-        console.error(error);
-        res.status(500).send("Error: " + error);
+        console.error(err);
+        res.status(500).send("Error: " + err);
       });
   }
 );
@@ -276,7 +276,7 @@ app.delete(
           res.status(201).json(updatedUser); 
         }
       })
-      .catch((error) => {
+      .catch((err) => {
         console.error(err);
         res.status(500).send("Error: " + err);
       });
