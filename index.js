@@ -212,16 +212,14 @@ app.put(
     if (!errors.isEmpty()) {
       return res.status(422).json({ errors: errors.array() });
     }
+    let hashedPassword = Users.hashPassword(req.body.Password);
 
-    Users.findOneAndUpdate({ _id: req.params.id })
+    Users.findOneAndUpdate(
+       { _id : req.params.id },
+       { $inc: { "Username" : req.body.Username, "Password": hashedPassword, "Email": req.body.Email, "Birthday": req.body.Birthday} },
+        { new: true }
+    )
       .then((user) => {
-        let hashedPassword = Users.hashPassword(req.body.Password);
-
-        user.Username = req.body.Username;
-        user.Password = hashedPassword;
-        user.Email = req.body.Email;
-        user.Birthday = req.body.Birthday;
-
         return res.status(201).json(user);
       })
       .catch((error) => {
