@@ -214,17 +214,28 @@ app.put(
     }
     let hashedPassword = Users.hashPassword(req.body.Password);
 
-    Users.findOneAndUpdate(
-       { _id : req.params.id },
-       { $inc: { "Username" : req.body.Username, "Password": hashedPassword, "Email": req.body.Email, "Birthday": req.body.Birthday} },
-        { new: true }
+        Users.findOneAndUpdate(
+      { _id: req.params.id },
+      {
+        $set: {
+          Username: req.body.Username,
+          Password: hashPassword,
+          Email: req.body.Email,
+          Birthday: req.body.Birthday
+        }
+      },
+      { new: true }
     )
-      .then((user) => {
-        return res.status(201).json(user);
+      .then((updatedUser) => {
+        if (!updatedUser) {
+          return res.status(404).send("Error: User doesn't exist");
+        } else {
+          res.json(updatedUser);
+        }
       })
-      .catch((error) => {
-        console.error(error);
-        res.status(500).send("Error: " + error);
+      .catch((err) => {
+        console.error(err);
+        res.status(500).send('Error: ' + err);
       });
   }
 );
