@@ -23,7 +23,7 @@ const cors = require("cors");
 
 app.use(
   cors({
-   origin: "https://myflix22.netlify.app",
+   origin: "https://movies-app1-3d6bd65a6f09.herokuapp.com/movies",
   })
  );
 // app.use(cors({
