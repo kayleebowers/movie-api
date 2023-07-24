@@ -19,7 +19,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // allow only requests from specific origins
 
 const cors = require("cors");
-// let allowedOrigins = ["https://myflix22.netlify.app/", "https://movies-app1-3d6bd65a6f09.herokuapp.com/"];
+let allowedOrigins = ["https://myflix22.netlify.app"];
 
 app.use(cors({
   origin: (origin, callback) => {
@@ -34,18 +34,6 @@ app.use(cors({
 // require cors to allow requests from all origins by default
 // const cors = require("cors");
 // app.use(cors());
-
-// Add Access Control Allow Origin headers
-let allowCrossDomain = function(req, res, next) {
-  res.header('Access-Control-Allow-Origin', 'https://myflix22.netlify.app/');
-  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-  res.header('Access-Control-Allow-Headers', 'Content-Type');
-  next();
-}
-
-app.configure(function() {
-  app.use(allowCrossDomain);
-});
 
 //require express-validator
 const { check, validationResult } = require("express-validator");
