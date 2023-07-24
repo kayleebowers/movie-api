@@ -228,21 +228,30 @@ app.put(
     if (!errors.isEmpty()) {
       return res.status(422).json({ errors: errors.array() });
     }
+    let hashedPassword = Users.hashPassword(req.body.Password);
 
-    Users.findOneAndUpdate({ _id: req.params.id })
-      .then((user) => {
-        let hashedPassword = Users.hashPassword(req.body.Password);
-
-        user.Username = req.body.Username;
-        user.Password = hashedPassword;
-        user.Email = req.body.Email;
-        user.Birthday = req.body.Birthday;
-
-        return res.status(201).json(user);
+        Users.findOneAndUpdate(
+      { _id: req.params.id },
+      {
+        $set: {
+          Username: req.body.Username,
+          Password: hashedPassword,
+          Email: req.body.Email,
+          Birthday: req.body.Birthday
+        }
+      },
+      { new: true }
+    )
+      .then((updatedUser) => {
+        if (!updatedUser) {
+          return res.status(404).send("Error: User doesn't exist");
+        } else {
+          res.json(updatedUser);
+        }
       })
-      .catch((error) => {
-        console.error(error);
-        res.status(500).send("Error: " + error);
+      .catch((err) => {
+        console.error(err);
+        res.status(500).send('Error: ' + err);
       });
   }
 );
