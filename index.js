@@ -21,11 +21,11 @@ app.use(bodyParser.urlencoded({ extended: true }));
 const cors = require("cors");
 // let allowedOrigins = ["https://myflix22.netlify.app/", "https://movies-app1-3d6bd65a6f09.herokuapp.com/"];
 
-app.use(
-  cors({
-   origin: "https://movies-app1-3d6bd65a6f09.herokuapp.com/movies",
-  })
- );
+// app.use(
+//   cors({
+//    origin: "https://movies-app1-3d6bd65a6f09.herokuapp.com/movies",
+//   })
+//  );
 // app.use(cors({
 //   origin: (origin, callback) => {
 //     if (!origin) return callback(null, true);
@@ -42,7 +42,7 @@ app.use(
 
 // Add Access Control Allow Origin headers
 app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", "https://yoursite.com");
+  res.setHeader("Access-Control-Allow-Origin", "https://movies-app1-3d6bd65a6f09.herokuapp.com");
   res.header(
     "Access-Control-Allow-Headers",
     "Origin, X-Requested-With, Content-Type, Accept"
