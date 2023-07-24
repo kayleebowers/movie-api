@@ -19,22 +19,36 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // allow only requests from specific origins
 
 const cors = require("cors");
-let allowedOrigins = ["https://myflix22.netlify.app/", "https://movies-app1-3d6bd65a6f09.herokuapp.com/"];
+// let allowedOrigins = ["https://myflix22.netlify.app/", "https://movies-app1-3d6bd65a6f09.herokuapp.com/"];
 
-app.use(cors({
-  origin: (origin, callback) => {
-    if (!origin) return callback(null, true);
-    if (allowedOrigins.indexOf(origin) === -1) {
-      let message = "The CORS policy for this application doesn’t allow access from origin " + origin;
-      return callback(new Error(message), false)
-    }
-    return callback(null, true);
-  }
-}))
+app.use(
+  cors({
+   origin: "https://myflix22.netlify.app/",
+  })
+ );
+// app.use(cors({
+//   origin: (origin, callback) => {
+//     if (!origin) return callback(null, true);
+//     if (allowedOrigins.indexOf(origin) === -1) {
+//       let message = "The CORS policy for this application doesn’t allow access from origin " + origin;
+//       return callback(new Error(message), false)
+//     }
+//     return callback(null, true);
+//   }
+// }))
 //require cors to allow requests from all origins by default
 // const cors = require("cors");
 // app.use(cors());
 
+// Add Access Control Allow Origin headers
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "https://yoursite.com");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  next();
+});
 
 //require express-validator
 const { check, validationResult } = require("express-validator");
