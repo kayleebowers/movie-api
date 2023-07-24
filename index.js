@@ -42,7 +42,7 @@ const cors = require("cors");
 
 // Add Access Control Allow Origin headers
 app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", "https://myflix22.netlify.app/");
+  res.setHeader("Access-Control-Allow-Origin", "https://myflix22.netlify.app");
   res.header(
     "Access-Control-Allow-Headers",
     "Origin, X-Requested-With, Content-Type, Accept"
