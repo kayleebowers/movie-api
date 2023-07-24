@@ -23,7 +23,7 @@ const cors = require("cors");
 
 app.use(
   cors({
-   origin: "https://myflix22.netlify.app/",
+   origin: "https://myflix22.netlify.app",
   })
  );
 // app.use(cors({
