@@ -16,9 +16,25 @@ const app = express(),
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-//require cors to allow requests from all origins by default
+// allow only requests from specific origins
+
 const cors = require("cors");
-app.use(cors());
+let allowedOrigins = ["https://myflix22.netlify.app/"];
+
+app.use(cors({
+  origin: (origin, callback) => {
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.indexOf(origin) === -1) {
+      let message = "The CORS policy for this application doesn’t allow access from origin " + origin;
+      return callback(new Error(message), false)
+    }
+    return callback(null, true);
+  }
+}))
+//require cors to allow requests from all origins by default
+// const cors = require("cors");
+// app.use(cors());
+
 
 //require express-validator
 const { check, validationResult } = require("express-validator");
