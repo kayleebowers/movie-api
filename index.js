@@ -19,7 +19,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // allow only requests from specific origins
 
 const cors = require("cors");
-let allowedOrigins = ["https://myflix22.netlify.app", "https://kayleebowers-glowing-happiness-977956rxrj4376rj-1234.preview.app.github.dev"];
+let allowedOrigins = ["https://myflix22.netlify.app", "https://orange-waddle-wppg7vrww96h9v7q-1234.app.github.dev"];
 
 app.use(cors({
   origin: (origin, callback) => {
