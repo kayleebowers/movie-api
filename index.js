@@ -63,7 +63,11 @@ const logStream = fs.createWriteStream(path.join(__dirname, "log.txt"), {
 //use Morgan to log requests to server
 app.use(morgan("common", { stream: logStream }));
 
-// Return a list of ALL movies to the user; — GET — /movies
+/**
+ * Endpoint returns a list of ALL movies to the user using the GET method.
+ * @example Using `https://movies-app1-3d6bd65a6f09.herokuapp.com/movies` will return an array of movie objects in JSON format.
+ * The URL endpoint is `/movies`. 
+ */ 
 app.get(
   "/movies",
   // passport.authenticate("jwt", { session: false }),
@@ -79,7 +83,11 @@ app.get(
   }
 );
 
-// get movie data by title — GET — /movies/:title
+/**
+ * Endpoint returns a movie's data using the GET method.
+ * @param The parameter is a movie title written without quotation marks to form the URL endpoint is `/movies/:title`. 
+ * @example An example of the URL with the parameter is `https://movies-app1-3d6bd65a6f09.herokuapp.com/movies/Spirited%20Away`.
+ */ 
 app.get(
   "/movies/:title",
   passport.authenticate("jwt", { session: false }),
@@ -95,7 +103,11 @@ app.get(
   }
 );
 
-// Return data about a genre (description) by name (e.g., “Thriller”); —GET — /movies/genres/:name
+/**
+ * Endpoint returns data about a movie's genre by name using the GET method.
+ * @param The parameter is a genre name to form the URL endpoint is `/genres/:name`. 
+ * @example An example of the URL with the parameter is `https://movies-app1-3d6bd65a6f09.herokuapp.com/genres/Drama`, which would return the response, "In film and television, drama is a category or genre of narrative fiction (or semi-fiction) intended to be more serious than humorous in tone."
+ */ 
 app.get(
   "/genres/:name",
   passport.authenticate("jwt", { session: false }),
@@ -111,7 +123,11 @@ app.get(
   }
 );
 
-// Return data about a director (bio, birth year, death year) by name; —GET /movies/directors
+/**
+ * Endpoint returns data about a movie's director by name using the GET method.
+ * @param The parameter is a director's name to form the URL endpoint is `/directors/:name`. 
+ * @example An example of the URL with the parameter is `https://movies-app1-3d6bd65a6f09.herokuapp.com/directors/Steven%20Spielberg`, which would return a JSON object with Steven Spielberg's information.
+ */ 
 app.get(
   "/directors/:name",
   passport.authenticate("jwt", { session: false }),
@@ -127,15 +143,11 @@ app.get(
   }
 );
 
-// Allow new users to register; —POST /users
-// Expected body format:
-// {
-//   ID: Integer,
-//   Username: String,
-//   Password: String,
-//   Email: String,
-//   Birthday: Date
-// }
+/**
+ * Endpoint registers a new user after receiving a valid request body using the POST method.
+ * @param No parameter is used, but the response body must be a JSON object in the following format: `{ "Username": String, "Password": String, "Email": String, "Birthday": Date }`. 
+ * @example An example of a valid entry is: `{ "Username": "NewUser", "Password": "543", "Email": "new@email.com", "Birthday": "1960-04-29" }`.
+ */ 
 app.post(
   "/users",
   //validate inputs on server side
@@ -186,7 +198,11 @@ app.post(
   }
 );
 
-// Get single user's data 
+/**
+ * Endpoint return's a single user's data using the GET method.
+ * @param The endpoint must receive a user ID to make up the URL endpoint `/users/:id`.
+ * @example The URL `https://movies-app1-3d6bd65a6f09.herokuapp.com/users/649a271eef2156d71e630260` would return a JSON object with this format `{ "Username": "existingUser", "Password": "testing", "Email": "test@email.com", "Birthday": "2023-09-09" }`.
+ */ 
 app.get("/users/:id", passport.authenticate("jwt", { session: false }), (req, res) => {
   Users.findOne( { _id: req.params.id } )
     .then((user) => {
@@ -199,18 +215,11 @@ app.get("/users/:id", passport.authenticate("jwt", { session: false }), (req, re
   }
 )
 
-// Allow users to update their user info (username); —PUT /users/:id
-/* We’ll expect JSON in this format
-  {
-    Username: String,
-    (required)
-    Password: String,
-    (required)
-    Email: String,
-    (required)
-    Birthday: Date
-  }*/
-
+/**
+ * Endpoint updates a single user's data using the PUT method.
+ * @param The endpoint must have a user ID to make up the URL endpoint `/users/:id`, as well as a JSON request body in this format `{ Username: String (required), Password: String (required), Email: String (required), Birthday: Date }`.
+ * @example The URL `https://movies-app1-3d6bd65a6f09.herokuapp.com/users/649a271eef2156d71e630260` might return an updated user object in this format: `{ "Username": "updatedUser", "Password": "updateMe", "Email": "update@email.com", "Birthday": "2013-09-09" }`.
+ */ 
 app.put(
   "/users/:id",
   passport.authenticate("jwt", { session: false }),
@@ -255,7 +264,11 @@ app.put(
   }
 );
 
-// Allow users to add a movie to their list of favorites —POST /movies/:title
+/**
+ * Endpoint allows users to add a movie to their list of favorites using the POST method.
+ * @param The requesting URL must have a user ID and a movie ID to make up the endpoint `/users/:id/movies/:movieId`.
+ * @example The example `https://movies-app1-3d6bd65a6f09.herokuapp.com/users/CoolKid/movies/649a271eef2156d71e630260` would return a JSON object displaying all of the user CoolKid's data, along with their new favorite movie in the Favorites array.
+ */ 
 app.post(
   "/users/:id/movies/:movieId",
   passport.authenticate("jwt", { session: false }),
@@ -281,7 +294,12 @@ app.post(
   }
 );
 
-// Allow users to remove a movie from their list of favorites (showing only a text that a movie has been removed); —DELETE /favorites/:title
+/**
+ * Endpoint allows users to remove a movie from their list of favorites using the DELETE method.
+ * @param The requesting URL must have a user ID and a movie ID to make up the endpoint `/users/:id/movies/:movieId`.
+ * @example The example `https://movies-app1-3d6bd65a6f09.herokuapp.com/users/CoolKid/movies/649a271eef2156d71e630260` would return a JSON object displaying all of the user CoolKid's data, along with their shorter (or empty) Favorites array.
+ * @returns A successful response will return a text message saying the movie has been removed.
+ */ 
 app.delete(
   "/users/:id/movies/:movieId",
   passport.authenticate("jwt", { session: false }),
@@ -307,6 +325,11 @@ app.delete(
   }
 );
 
+/**
+ * Endpoint deletes a single user's data using the DELETE method.
+ * @param The endpoint must have a user ID to make up the URL endpoint `/users/:id`.
+ * @example The URL `https://movies-app1-3d6bd65a6f09.herokuapp.com/users/649a271eef2156d71e630260` would return the HTML response, "649a271eef2156d71e630260 was deleted." If the user ID does not exist, it will instead return "649a271eef2156d71e630260 was not found."
+ */ 
 // Allow existing users to deregister by username —DELETE /users/:id
 app.delete(
   "/users/:id",

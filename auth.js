@@ -14,7 +14,10 @@ let generateJWTToken = (user) => {
     });
 }
 
-//POST login 
+/**
+ * Endpoint authenticates and logs a registered user in using the POST method.
+ * @returns If successful, it will return a JSON object listing all the user data and their issued JWT to provide access to the rest of the site.
+ */ 
 module.exports = (router) => {
     router.post('/login', (req, res) => {
         passport.authenticate('local', { session: false }, (error, user, info) => {
