@@ -8,15 +8,21 @@ const express = require("express"),
   path = require("path");
 
 const app = express(),
-  //declare models
+  /**
+   * declare models
+   */
   Movies = models.Movie,
   Users = models.User;
 
-//set up bodyParser
+/**
+ * set up bodyParser
+ */
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// allow only requests from specific origins
+/**
+ * allow only requests from specific origins
+ */
 
 const cors = require("cors");
 let allowedOrigins = ["https://myflix22.netlify.app", "https://obscure-rotary-phone-455w7qjxx6qfq769-4200.app.github.dev", "https://kayleebowers.github.io"];
@@ -31,36 +37,51 @@ app.use(cors({
     return callback(null, true);
   }
 }))
-// require cors to allow requests from all origins by default
-// const cors = require("cors");
-// app.use(cors());
 
-//require express-validator
+/** 
+ * require cors to allow requests from all origins by default
+ * const cors = require("cors");
+ * app.use(cors());
+ */
+
+/**
+ * require express-validator
+ */
 const { check, validationResult } = require("express-validator");
 
-//require auth and passport
+/**
+ * require auth and passport
+ */
 let auth = require("./auth")(app);
 const passport = require("passport");
 require("./passport");
 
-//connect mongoose to online database
+/**
+ * connect mongoose to online database
+ */
 mongoose.connect(process.env.CONNECTION_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
 
-// connect mongoose to local database
-// mongoose.connect("mongodb://localhost:27017/moviesdb", {
-//   useNewUrlParser: true,
-//   useUnifiedTopology: true,
-// });
+/**
+ * connect mongoose to local database
+ * mongoose.connect("mongodb://localhost:27017/moviesdb", {
+ * useNewUrlParser: true,
+ * useUnifiedTopology: true,
+ * });
+ */
 
-//create write stream
+/**
+ * create write stream
+ */
 const logStream = fs.createWriteStream(path.join(__dirname, "log.txt"), {
   flags: "a",
 });
 
-//use Morgan to log requests to server
+/**
+ * use Morgan to log requests to server
+ */
 app.use(morgan("common", { stream: logStream }));
 
 /**
@@ -70,7 +91,6 @@ app.use(morgan("common", { stream: logStream }));
  */ 
 app.get(
   "/movies",
-  // passport.authenticate("jwt", { session: false }),
   (req, res) => {
     Movies.find()
       .then((movies) => {
@@ -152,7 +172,9 @@ app.get(
  */ 
 app.post(
   "/users",
-  //validate inputs on server side
+  /**
+   * validate inputs on server side
+   */
   [
     check(
       "Username",
@@ -165,7 +187,9 @@ app.post(
   ],
   (req, res) => {
 
-    //check validation object for errors
+    /** 
+     * check validation object for errors
+     */
     let errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(422).json({ errors: errors.array() });
@@ -173,7 +197,9 @@ app.post(
 
     let hashedPassword = Users.hashPassword(req.body.Password);
     Users.findOne({ Username: req.body.Username })
-      //check if user already exists
+      /**
+       * check if user already exists
+       */
       .then((user) => {
         if (user) {
           return res.status(400).send(req.body.Username + " already exists");
@@ -220,14 +246,15 @@ app.get("/users/:id", passport.authenticate("jwt", { session: false }), (req, re
 
 /**
  * Endpoint updates a single user's data using the PUT method.
- * @param id
  * The endpoint must have a user ID to make up the URL endpoint `/users/:id`, as well as a JSON request body in this format `{ Username: String (required), Password: String (required), Email: String (required), Birthday: Date }`.
  * @example The URL `https://movies-app1-3d6bd65a6f09.herokuapp.com/users/649a271eef2156d71e630260` might return an updated user object in this format: `{ "Username": "updatedUser", "Password": "updateMe", "Email": "update@email.com", "Birthday": "2013-09-09" }`.
  */ 
 app.put(
   "/users/:id",
   passport.authenticate("jwt", { session: false }),
-  //validate user input in req body
+  /**
+   * validate user input in req body
+   */
   [
     check("Username", "Username must contain at least 5 characters that are all alphanumeric").isAlphanumeric().isLength({ min: 5 }),
     check("Password", "Password is required").not().isEmpty(),
@@ -235,7 +262,9 @@ app.put(
     check("Birthday", "Date must be valid").isDate()
   ],
   (req, res) => {
-    //check validation object for errors
+    /**
+     * check validation object for errors
+     */
     let errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(422).json({ errors: errors.array() });
@@ -359,15 +388,21 @@ app.delete(
   }
 );
 
-// get textual default at / route
+/**
+ * get textual default at / route
+ */
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "public/documentation.html"));
 });
 
-// Use express.static to serve your “documentation.html” file from the public folder
+/**
+ * Use express.static to serve your “documentation.html” file from the public folder
+ */
 app.use(express.static("public"));
 
-// create error-handling middleware function
+/**
+ * create error-handling middleware function
+ */
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).send("Something went wrong");
